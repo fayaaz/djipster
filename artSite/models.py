@@ -1,7 +1,25 @@
 from django.db import models
 from markdown import markdown
+from django.core.exceptions import ValidationError
+
+def validate_only_one_instance(obj):
+    model = obj.__class__
+    if (model.objects.count() > 0 and
+            obj.id != model.objects.get().id):
+        raise ValidationError("Can only create 1 %s instance" % model.__name__)
 
 # Create your models here.
+
+class Title(models.Model):
+    '''Title of the site: only allows one entry'''    
+    title = models.CharField(max_length=255)
+    
+    def clean(self):
+        validate_only_one_instance(self)
+
+    def __unicode__(self):
+        return self.title
+    
 class Gallery(models.Model):
     '''A gallery for projects and art pieces'''
     title = models.CharField(max_length=20)

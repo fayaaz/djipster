@@ -1,5 +1,5 @@
 """
-Django settings for joeArtSite project.
+Django settings for djipster project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -70,9 +70,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'joeArtSite.urls'
+ROOT_URLCONF = 'djipster.urls'
 
-WSGI_APPLICATION = 'joeArtSite.wsgi.application'
+WSGI_APPLICATION = 'djipster.wsgi.application'
 
 
 # Database

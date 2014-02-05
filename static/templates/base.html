@@ -1,3 +1,4 @@
+{% load title %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Joe Shaw {% block pagetitle %}{% endblock%}</title>
+    <title>{% get_title %} {% block pagetitle %}{% endblock%}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -41,7 +42,7 @@
                 </a>
                 
                 <a class="navbar-brand" href="{% url "root" %}">
-                	<!-- span class="light">Joe</span> Shaw -->
+                	<!-- span class="light">firstname</span> lastname -->
                 </a>
             </div>
 
@@ -73,7 +74,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">Joe Shaw</h1>
+                        <h1 class="brand-heading"> {% get_title %}</h1>
                         
 
 
