@@ -19,7 +19,7 @@ MEDIA_ROOT = os.path.join(SITE_ROOT, 'media')
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR,'templates'),
+TEMPLATE_DIRS = (os.path.join(BASE_DIR,'static/templates'),
                 )
 
 ROOT_PATH = os.path.join(os.path.dirname(__file__), '..')  # up one level from settings.py
