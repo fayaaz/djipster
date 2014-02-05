@@ -15,3 +15,5 @@ Install and run like a django project:
 Built on
 --------------
 Built with Django, Grapelli, Twitter Bootstrap and Grayscale theme.
+
+Made for Joe and Pete
