@@ -31,7 +31,7 @@ class Gallery(models.Model):
 class Project(models.Model):
     '''A project is a group of art pieces linked somehow'''
     title = models.CharField(max_length=20)
-    gallery = models.ForeignKey('Gallery')
+    gallery = models.ForeignKey('Gallery', null = True, blank = True)
     image = models.FileField(upload_to = 'upload/project')
     
     def __unicode__(self):
@@ -40,8 +40,8 @@ class Project(models.Model):
 class Art(models.Model):
     '''Each art piece. Has to be in a gallery and project'''
     title = models.CharField(max_length=50)
-    project = models.ForeignKey('Project')
-    gallery = models.ForeignKey('Gallery')
+    project = models.ForeignKey('Project',  null = True, blank = True)
+    gallery = models.ForeignKey('Gallery',  null = True, blank = True)
     image = models.FileField(upload_to = 'upload/art')
     
     def __unicode__(self):
