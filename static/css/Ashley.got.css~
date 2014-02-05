@@ -1,0 +1,36 @@
+/*----- Ashley Smith Fantastic Styling -----*/
+
+body {
+	font-family: arial;
+}
+
+.artist {
+	padding: 10px;
+	background: black;
+	color: #Fafafa;
+	border-bottom: solid 2px grey;
+}
+
+.artist:hover {
+	background: #FAFAFA;
+	color: black;
+}
+
+#piplayer {
+	
+}
+
+/*----- Sidebar ----*/
+
+#sidebar {
+	
+}
+
+.sidebar-nav {
+	
+}
+
+#main-container {
+	
+	
+}

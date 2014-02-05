@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block pagetitle %}{% endblock%}
+
+{% block content %}
+	{% for item in items%}
+	<section id="{{forloop.counter}}" class="text-center">
+        <div class="download-section" style="background-image: url({{MEDIA_URL}}{{ item.2 }});">
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2></h2>
+                     <a href="{{ item.1 }}#1" class="btn btn-default btn-lg">{{ item.0 }}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+	{% endfor %}
+{% endblock %}

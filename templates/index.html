@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block pagetitle %}{% endblock%}
+
+{% block content %}
+	{% for item in items%}
+	
+	<section id = "{{forloop.counter}}" class="intro intro-seperator" style="background-image: url({{MEDIA_URL}}{{ item.2 }});">
+        <div class="intro-body">
+            <div class="container">
+            	<div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                    	<div class="page-scroll">
+                    	{%if forloop.last%}
+                            <a href="#page-top" class="btn btn-circle">
+                                <i class="fa fa-angle-double-up animated"></i>
+                          	</a>
+                        
+                    	{%else%}
+                            <a href="#{{forloop.counter|add:"1"}}" class="btn btn-circle">
+                                <i class="fa fa-angle-down animated"></i>
+                          	</a>
+                        {%endif%}
+                        {%block button%}
+                        <div id="footer">
+	                         <a href="{%url "root"%}{{item.1}}#1" class="btn btn-circle">
+	                                <i class="fa fa-angle-right animated"></i>
+	                          	</a>
+	                    </div>
+                        {%endblock%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+	{% endfor %}
+{% endblock %}
