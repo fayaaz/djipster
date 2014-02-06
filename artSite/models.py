@@ -3,6 +3,7 @@ from markdown import markdown
 from django.core.exceptions import ValidationError
 
 def validate_only_one_instance(obj):
+    ''' Used for making sure only one entry exists on a model. For example the title of the site '''
     model = obj.__class__
     if (model.objects.count() > 0 and
             obj.id != model.objects.get().id):
