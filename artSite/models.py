@@ -11,6 +11,16 @@ def validate_only_one_instance(obj):
 
 # Create your models here.
 
+class MainPicture(models.Model):
+
+    image = models.FileField(upload_to = 'upload/main')
+    
+    def clean(self):
+        validate_only_one_instance(self)
+
+    def __unicode__(self):
+        return str(self.image)
+    
 class Title(models.Model):
     '''Title of the site: only allows one entry'''    
     title = models.CharField(max_length=255)
