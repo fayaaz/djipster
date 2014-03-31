@@ -10,11 +10,10 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 import os
 
-SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
-BASE_DIR = SITE_ROOT
-MEDIA_ROOT = os.path.join(SITE_ROOT, 'media')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
@@ -51,6 +50,7 @@ TEMPLATE_LOADERS = (
 
 INSTALLED_APPS = (
     'grappelli',
+    'south',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
