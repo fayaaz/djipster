@@ -113,27 +113,32 @@ body:after {
   height: 100%;
   cursor: pointer;
   /* Trick IE into showing hover */
-  display: block;
+  display: none;
 }
 
 /* line 84, ../sass/lightbox.sass */
 .lb-prev {
   left: 0;
   float: left;
+  visibility: hidden;
 }
 /* line 87, ../sass/lightbox.sass */
 .lb-prev:hover {
   background: url(../img/prev.png) left 48% no-repeat;
+  visibility: hidden;
 }
 
 /* line 90, ../sass/lightbox.sass */
 .lb-next {
   right: 0;
   float: right;
+  visibility: hidden;
 }
 /* line 93, ../sass/lightbox.sass */
 .lb-next:hover {
   background: url(../img/next.png) right 48% no-repeat;
+  display: none;
+  visibility: hidden;
 }
 
 /* line 96, ../sass/lightbox.sass */

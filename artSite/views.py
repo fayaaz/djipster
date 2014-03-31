@@ -57,7 +57,7 @@ class ListsDef():
             allAboutList.append((about.title, about.id, about.image, about.body))
         return allAboutList
         
-def MainPage(request):
+def ProjectsPage(request):
     context = RequestContext(request)
     artClass = ListsDef()
     projectsList = artClass.allProjects()
