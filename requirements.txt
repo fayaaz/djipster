@@ -1,4 +1,7 @@
-#requirements.txt
 Django==1.6.1
-markdown==2.3.1
+Markdown==2.3.1
+Pillow==2.3.0
+South==0.8.4
+Wand==0.3.7
 django-grappelli==2.5.1
+pytz==2013.9
