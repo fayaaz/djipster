@@ -23,11 +23,11 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('', 
     url(r'^static/(?P<path>.*)$','django.views.static.serve',
-        {'document_root': os.path.join(settings.SITE_ROOT, 'static')})
+        {'document_root': os.path.join(settings.BASE_DIR, 'static')})
 )
 
 urlpatterns += patterns('', 
     url(r'^media/(?P<path>.*)$','django.views.static.serve',
-        {'document_root': os.path.join(settings.SITE_ROOT, 'media')})
+        {'document_root': os.path.join(settings.BASE_DIR, 'media')})
 )
 
