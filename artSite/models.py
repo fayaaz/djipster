@@ -1,6 +1,8 @@
 from django.db import models
 from markdown import markdown
 from django.core.exceptions import ValidationError
+from django.dispatch import Signal
+from imagefuncs import imgResize, imgRename
 
 def validate_only_one_instance(obj):
     ''' Used for making sure only one entry exists on a model. For example the title of the site '''
@@ -41,9 +43,21 @@ class Gallery(models.Model):
     
 class Project(models.Model):
     '''A project is a group of art pieces linked somehow'''
+    
     title = models.CharField(max_length=20)
     gallery = models.ForeignKey('Gallery', null = True, blank = True)
     image = models.FileField(upload_to = 'upload/project')
+    image_res = models.FileField(default = 'notResized', upload_to = 'upload/project', blank = True, null = True, editable = False)
+    
+    
+    def save(self):
+        self.image_res = str(imgRename(str(self.image)))
+        super(Project, self).save()
+        
+        try:
+            imgResize('media/'+str(self.image), 1024)
+        except:
+            
     
     def __unicode__(self):
         return self.title
@@ -55,6 +69,7 @@ class Art(models.Model):
     gallery = models.ForeignKey('Gallery',  null = True, blank = True)
     image = models.FileField(upload_to = 'upload/art')
     
+
     def __unicode__(self):
         return self.title
     
@@ -72,3 +87,4 @@ class About(models.Model):
         '''Save the markdown to HTML'''
         self.body = markdown(self.body_markdown)
         super(About, self).save() # Call the "real" save() method.
+        
