@@ -10,7 +10,7 @@ def imgResize(file, maxWidth):
     
     
     if (maxWidth >= inWidth):
-        outputImage.save(newFileName, optimize=True, quality=85)
+        inputImage.save(newFileName, optimize=True, quality=85)
         return newFileName
     
     imgRatio = float(inHeight)/inWidth

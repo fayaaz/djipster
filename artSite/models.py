@@ -36,8 +36,17 @@ class Title(models.Model):
     
 class Gallery(models.Model):
     '''A gallery for projects and art pieces'''
+    upload_folder = 'upload/gallery'
+    
     title = models.CharField(max_length=20)
-    image = models.FileField(upload_to = 'upload/gallery')
+    image = models.FileField(upload_to = upload_folder)
+    image_res = models.FileField(default = 'notResized', upload_to = upload_folder, blank = True, null = True, editable = False)
+
+    def save(self):
+        self.image_res = self.upload_folder+'/'+str(imgRename(str(self.image)))
+        super(Gallery, self).save()
+        
+        resizeTry('media/'+str(self.image))
     
     def __unicode__(self):
         return self.title
@@ -50,11 +59,11 @@ class Project(models.Model):
     title = models.CharField(max_length=20)
     gallery = models.ForeignKey('Gallery', null = True, blank = True)
     image = models.FileField(upload_to = upload_folder)
-    image_res = models.FileField(default = 'notResized', upload_to = 'upload/project', blank = True, null = True, editable = False)
+    image_res = models.FileField(default = 'notResized', upload_to = upload_folder, blank = True, null = True, editable = False)
     
     
     def save(self):
-        self.image_res = upload_folder+'/'+str(imgRename(str(self.image)))
+        self.image_res = self.upload_folder+'/'+str(imgRename(str(self.image)))
         super(Project, self).save()
         
         resizeTry('media/'+str(self.image))
@@ -65,11 +74,20 @@ class Project(models.Model):
     
 class Art(models.Model):
     '''Each art piece. Has to be in a gallery and project'''
+
+    upload_folder = 'upload/art'
+    
     title = models.CharField(max_length=50)
     project = models.ForeignKey('Project',  null = True, blank = True)
     gallery = models.ForeignKey('Gallery',  null = True, blank = True)
-    image = models.FileField(upload_to = 'upload/art')
+    image = models.FileField(upload_to = upload_folder)
+    image_res = models.FileField(default = 'notResized', upload_to = upload_folder, blank = True, null = True, editable = False)
     
+    def save(self):
+        self.image_res = self.upload_folder+'/'+str(imgRename(str(self.image)))
+        super(Art, self).save()
+        
+        resizeTry('media/'+str(self.image))
 
     def __unicode__(self):
         return self.title
