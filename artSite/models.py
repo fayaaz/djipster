@@ -1,4 +1,5 @@
 from django.db import models
+from time import sleep
 from markdown import markdown
 from django.core.exceptions import ValidationError
 from django.dispatch import Signal
@@ -44,19 +45,19 @@ class Gallery(models.Model):
 class Project(models.Model):
     '''A project is a group of art pieces linked somehow'''
     
+    upload_folder = 'upload/project'
+    
     title = models.CharField(max_length=20)
     gallery = models.ForeignKey('Gallery', null = True, blank = True)
-    image = models.FileField(upload_to = 'upload/project')
+    image = models.FileField(upload_to = upload_folder)
     image_res = models.FileField(default = 'notResized', upload_to = 'upload/project', blank = True, null = True, editable = False)
     
     
     def save(self):
-        self.image_res = str(imgRename(str(self.image)))
+        self.image_res = upload_folder+'/'+str(imgRename(str(self.image)))
         super(Project, self).save()
         
-        try:
-            imgResize('media/'+str(self.image), 1024)
-        except:
+        resizeTry('media/'+str(self.image))
             
     
     def __unicode__(self):
@@ -88,3 +89,10 @@ class About(models.Model):
         self.body = markdown(self.body_markdown)
         super(About, self).save() # Call the "real" save() method.
         
+def resizeTry(image):
+    
+    try:
+        imgResize(image, 1024)
+    except IOError:
+        sleep(0.1)
+        resizeTry(image)
