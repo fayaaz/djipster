@@ -3,20 +3,20 @@ from django.template import RequestContext, Template
 from artSite.models import Gallery, Art, Project, About
 
 
-class ListsDef():
+class ArtLists():
     
     def allGalleries(self):
         """ Get all the galleries for the main page """
         sortedGalleryList=[] 
         for gallery in Gallery.objects.all().order_by('id'): 
-            sortedGalleryList.append((gallery.title, gallery.id, gallery.image)) 
+            sortedGalleryList.append((gallery.title, gallery.id, gallery.image_res, gallery.image)) 
         return sortedGalleryList
     
     def artsInGallery(self, id):
-        
+        """ Get all the pieces of art in the Gallery """
         sortedArtsList=[]
         for art in Art.objects.filter(gallery__id__exact = id).order_by('id'):
-            sortedArtsList.append((art.title, art.id, art.image))
+            sortedArtsList.append((art.title, art.id, art.image_res, art.image))
             
         return sortedArtsList
     
@@ -32,7 +32,7 @@ class ListsDef():
         """ Get all art for gallery"""        
         artList = []
         for art in Art.objects.all().order_by('id'):
-            artList.append((art.title, art.id, art.image))
+            artList.append((art.title, art.id, art.image_res, art.image))
         return artList
     
     def artsInProject(self, projectid):
@@ -40,11 +40,11 @@ class ListsDef():
         artInProject = Art.objects.filter(project__id__exact = projectid)
         artList = []
         for art in artInProject:
-            artList.append((art.title, art.id, art.image))
+            artList.append((art.title, art.id, art.image_res, art.image))
         return artList
     
     def allProjects(self):
-        """ Get all Projects - this is the main view """
+        """ Get all Projects """
         allProjectsList = []
         for projects in Project.objects.all().order_by('id'):
             allProjectsList.append((projects.title, projects.id, projects.image))
@@ -58,16 +58,18 @@ class ListsDef():
         return allAboutList
         
 def ProjectsPage(request):
+    """ Page to show all projects """
     context = RequestContext(request)
-    artClass = ListsDef()
+    artClass = ArtLists()
     projectsList = artClass.allProjects()
     
     if request.method == 'GET':
         return render_to_response('index.html', {'items':projectsList}, context )
 
 def GalleriesPage(request):
+    """ This is the main page (set in urls.py) - page shows all galleries"""
     context = RequestContext(request)
-    artClass = ListsDef()
+    artClass = ArtLists()
     projectsList = artClass.allGalleries()
     
     if request.method == 'GET':
@@ -75,7 +77,7 @@ def GalleriesPage(request):
     
 def ArtsInProject(request, id):
     context = RequestContext(request)
-    artClass = ListsDef()
+    artClass = ArtLists()
     artsList = artClass.artsInProject(id)
     
     if request.method == 'GET':
@@ -83,7 +85,7 @@ def ArtsInProject(request, id):
     
 def ArtInGallery(request, id):
     context = RequestContext(request)
-    artClass = ListsDef()
+    artClass = ArtLists()
     projectsList = artClass.artsInGallery(id)
     
     if request.method == 'GET':
@@ -91,7 +93,7 @@ def ArtInGallery(request, id):
     
 def AllArt(request):
     context = RequestContext(request)
-    artClass = ListsDef()
+    artClass = ArtLists()
     artsList = artClass.allArts()
     
     if request.method == 'GET':
@@ -99,7 +101,7 @@ def AllArt(request):
     
 def AboutView(request):
     context = RequestContext(request)
-    artClass = ListsDef()
+    artClass = ArtLists()
     aboutList = artClass.aboutSections()
     
     if request.method == 'GET':

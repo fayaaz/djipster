@@ -1,5 +1,6 @@
 from PIL import Image
 
+
 def imgResize(file, maxWidth):
     """Reduce image dimensions and quality"""
     

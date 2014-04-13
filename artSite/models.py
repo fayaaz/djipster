@@ -43,7 +43,7 @@ class Gallery(models.Model):
     image_res = models.FileField(default = 'notResized', upload_to = upload_folder, blank = True, null = True, editable = False)
 
     def save(self):
-        self.image_res = self.upload_folder+'/'+str(imgRename(str(self.image)))
+        self.image_res = str(imgRename(str(self.image)))
         super(Gallery, self).save()
         
         resizeTry('media/'+str(self.image))
@@ -63,7 +63,7 @@ class Project(models.Model):
     
     
     def save(self):
-        self.image_res = self.upload_folder+'/'+str(imgRename(str(self.image)))
+        self.image_res = str(imgRename(str(self.image)))
         super(Project, self).save()
         
         resizeTry('media/'+str(self.image))
@@ -84,7 +84,7 @@ class Art(models.Model):
     image_res = models.FileField(default = 'notResized', upload_to = upload_folder, blank = True, null = True, editable = False)
     
     def save(self):
-        self.image_res = self.upload_folder+'/'+str(imgRename(str(self.image)))
+        self.image_res = str(imgRename(str(self.image)))
         super(Art, self).save()
         
         resizeTry('media/'+str(self.image))
@@ -114,3 +114,13 @@ def resizeTry(image):
     except IOError:
         sleep(0.1)
         resizeTry(image)
+        
+def allGalleryResize():
+    
+    for gallery in Gallery.objects.all() :
+        gallery.save()
+        
+def allArtResize():
+    
+    for art in Art.objects.all() :
+        art.save()
