@@ -84,8 +84,7 @@ class Art(models.Model):
     gallery = models.ForeignKey('Gallery',  null = True, blank = True)
     image = models.FileField(upload_to = upload_folder)
     image_res = models.FileField(default = 'notResized', upload_to = upload_folder, blank = True, null = True, editable = False)
-    description_markdown = models.TextField('Description', help_text='Write in Markdown! <a href=\'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet/\'  target=\'_blank\'>Help</a>', blank=True, null=True)
-    description = models.TextField('Description HTML', help_text='HTML from markdown : Do not edit me!', blank=True, null = True)
+    description = models.TextField('Description', help_text='Say something if you want', blank=True, null = True)
     
     def save(self):
         ''' Resize uploaded image by saving the model first, resizing and then saving again '''
