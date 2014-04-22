@@ -2,6 +2,11 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext, Template
 from artSite.models import Gallery, Art, Project, About
 
+def ArtListItems(object):
+    if not object.description:
+        object.description = "No words to be said"
+    items = (object.title, object.id, object.image_res, object.image, object.description)
+    return items
 
 class ArtLists():
     
@@ -14,11 +19,11 @@ class ArtLists():
     
     def artsInGallery(self, id):
         """ Get all the pieces of art in the Gallery """
-        sortedArtsList=[]
+        artList=[]
         for art in Art.objects.filter(gallery__id__exact = id).order_by('id'):
-            sortedArtsList.append((art.title, art.id, art.image_res, art.image))
+            artList.append(ArtListItems(art))
             
-        return sortedArtsList
+        return artList
     
     def projectsInGallery(self, galleryid):
         """" Get page of projects in the gallery """
@@ -32,7 +37,7 @@ class ArtLists():
         """ Get all art for gallery"""        
         artList = []
         for art in Art.objects.all().order_by('id'):
-            artList.append((art.title, art.id, art.image_res, art.image))
+            artList.append(ArtListItems(art))
         return artList
     
     def artsInProject(self, projectid):
@@ -40,7 +45,7 @@ class ArtLists():
         artInProject = Art.objects.filter(project__id__exact = projectid)
         artList = []
         for art in artInProject:
-            artList.append((art.title, art.id, art.image_res, art.image))
+            artList.append(ArtListItems(art))
         return artList
     
     def allProjects(self):
@@ -106,4 +111,6 @@ def AboutView(request):
     
     if request.method == 'GET':
         return render_to_response('about.html', {'items':aboutList}, context)
+    
+
     

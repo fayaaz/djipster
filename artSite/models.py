@@ -113,7 +113,7 @@ class About(models.Model):
         super(About, self).save() # Call the "real" save() method.
         
 def resizeTry(image):
-    
+    '''This is terrible, terrible recursion : an absolute hack. Maybe use recursion counters '''
     try:
         imgResize(image, 1024)
     except IOError:

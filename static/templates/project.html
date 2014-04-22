@@ -4,12 +4,19 @@
         {%block button%}
         <div id="footer">
             <a href="{{MEDIA_URL}}{{ item.3 }}"  data-lightbox="gallery" class="btn btn-circle">
-                    <i class="fa fa-search animated"></i>
+            	<i class="fa fa-search animated"></i>
             </a>
+            <button data-container="body" data-toggle="popover" data-trigger="hover" data-placement="bottom" 
+            		data-content="{{ item.4 | safe }}" class="btn-description btn btn-circle">
+            	<i class="fa fa-question animated"></i>
+            </button>
         </div>
         {%endblock%}
         
 {% block scripts %}
 <script>
+	$('.btn-description').popover();
+</script>
 
 {%endblock%}
+<!--{{ item.5 | safe }} --> 

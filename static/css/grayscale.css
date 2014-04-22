@@ -362,3 +362,19 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
+
+.popover-content {
+	color: white;
+	font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: 500;
+}
+
+.popover{
+	background:   rgba(0 ,0, 0, 0.7);
+	border-radius: 1;
+
+	}
+	
+.arrow {
+	background:   rgba(0 ,0, 0, 0.7);
+}

@@ -11,12 +11,12 @@
                     <div class="col-md-8 col-md-offset-2">
                     	<div class="page-scroll">
                     	{%if forloop.last%}
-                            <a href="#page-top" class="btn btn-circle">
+                            <a href="#page-top" class="btn btn-circle btn-scroll">
                                 <i class="fa fa-angle-double-up animated"></i>
                           	</a>
                         
                     	{%else%}
-                            <a href="#{{forloop.counter|add:"1"}}" class="btn btn-circle">
+                            <a href="#{{forloop.counter|add:"1"}}" class="btn btn-circle btn-scroll">
                                 <i class="fa fa-angle-down animated"></i>
                           	</a>
                         {%endif%}
