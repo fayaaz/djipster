@@ -13,7 +13,7 @@ class ArtLists():
     def allGalleries(self):
         """ Get all the galleries for the main page """
         sortedGalleryList=[] 
-        for gallery in Gallery.objects.all().order_by('id'): 
+        for gallery in Gallery.objects.all().order_by('id').reverse(): 
             sortedGalleryList.append((gallery.title, gallery.id, gallery.image_res, gallery.image)) 
         return sortedGalleryList
     

@@ -45,10 +45,10 @@ class Gallery(models.Model):
     image_res = models.FileField(default = 'notResized', upload_to = upload_folder, blank = True, null = True, editable = False)
 
     def save(self):
-        super(Art, self).save()
+        super(Gallery, self).save()
         self.image_res = str(imgRename(str(self.image)))
         resizeTry(os.path.join(BASE_DIR, 'media', str(self.image)))
-        super(Art, self).save()
+        super(Gallery, self).save()
     
     def __unicode__(self):
         return self.title
@@ -66,10 +66,10 @@ class Project(models.Model):
     
     def save(self):
         ''' Resize uploaded image by saving the model first, resizing and then saving again '''
-        super(Art, self).save()
+        super(Project, self).save()
         self.image_res = str(imgRename(str(self.image)))
         resizeTry(os.path.join(BASE_DIR, 'media', str(self.image)))
-        super(Art, self).save()
+        super(Project, self).save()
         
     def __unicode__(self):
         return self.title
