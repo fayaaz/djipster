@@ -11,13 +11,13 @@ def imgResize(file, maxWidth):
     
     
     if (maxWidth >= inWidth):
-        inputImage.save(newFileName, optimize=True, quality=85)
+        inputImage.save(newFileName, optimize=True, quality=85, progressive=True)
         return newFileName
     
     imgRatio = float(inHeight)/inWidth
     
     outputImage = inputImage.resize((maxWidth, int(maxWidth*imgRatio)), Image.ANTIALIAS)
-    outputImage.save(newFileName, optimize=True, quality=85)
+    outputImage.save(newFileName, optimize=True, quality=85, progressive=True)
         
     return newFileName
 
