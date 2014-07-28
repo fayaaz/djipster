@@ -17,3 +17,4 @@ media/
 static/img/intro-bg-old.jpg
 error.log
 static/img/intro-bg.jpg
+djipster/wsgi.py
