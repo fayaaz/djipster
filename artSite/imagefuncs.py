@@ -24,6 +24,6 @@ def imgResize(file, maxWidth):
 def imgRename(fileName):
     
     fileNameSplit = fileName.split('.')
-    newFileName = fileNameSplit[0]+'_rez.'+fileNameSplit[1]
+    newFileName = fileNameSplit[0]+'_rez.'+fileNameSplit[-1]
     
     return newFileName

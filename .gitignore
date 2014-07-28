@@ -12,3 +12,8 @@ media/upload/main/Boohoo_o.jpg
 artSite/migrations/0001_initial.py
 media/upload/
 artSite/migrations/
+access.log*
+media/
+static/img/intro-bg-old.jpg
+error.log
+static/img/intro-bg.jpg
