@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     url(r'^all/$', 'artSite.views.AllArt', name='all'),
     url(r'^about/$', 'artSite.views.AboutView', name='about'),
     url(r'^(\w+)/$', 'artSite.views.ArtsInProject', name='Art in Collection'),
-    
+    url(r'^artMore/(\w+)/$', 'artSite.views.ArtModalView', name='Art More Info')
 )
 
 urlpatterns += patterns('', 

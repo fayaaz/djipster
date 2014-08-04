@@ -64,7 +64,7 @@ body:after {
 
 /* line 44, ../sass/lightbox.sass */
 .lb-container {
-  padding: 4px;
+  padding: 20px auto;
 }
 
 /* line 47, ../sass/lightbox.sass */
@@ -186,6 +186,7 @@ body:after {
   padding-bottom: 1em;
   font-size: 12px;
   color: #999999;
+  visibility: hidden;
 }
 /* line 121, ../sass/lightbox.sass */
 .lb-data .lb-close {
@@ -198,6 +199,7 @@ body:after {
   outline: none;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
+  visibility: hidden;
 }
 /* line 130, ../sass/lightbox.sass */
 .lb-data .lb-close:hover {

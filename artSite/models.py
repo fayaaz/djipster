@@ -14,8 +14,6 @@ def validate_only_one_instance(obj):
             obj.id != model.objects.get().id):
         raise ValidationError("Can only create 1 %s instance" % model.__name__)
 
-# Create your models here.
-
 class MainPicture(models.Model):
 
     image = models.FileField(upload_to = 'upload/main')
@@ -84,10 +82,13 @@ class Art(models.Model):
     gallery = models.ForeignKey('Gallery',  null = True, blank = True)
     image = models.FileField(upload_to = upload_folder)
     image_res = models.FileField(default = 'notResized', upload_to = upload_folder, blank = True, null = True, editable = False)
-    description = models.TextField('Description', help_text='Say something if you want', blank=True, null = True)
+    description = models.CharField('Description', help_text='Say something if you want', max_length=255, blank=True, null = True)
+    more_info_markdown = models.TextField('More info on the art', help_text='Write in Markdown! <a href=\'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet/\'  target=\'_blank\'>Help</a>', blank=True, null=True)
+    more_info_html = models.TextField('More info HTML', help_text='HTML from markdown : Do not edit me!', blank=True, null=True)
     
     def save(self):
         ''' Resize uploaded image by saving the model first, resizing and then saving again '''
+        self.more_info_html = markdown(self.more_info_markdown)
         super(Art, self).save()
         self.image_res = str(imgRename(str(self.image)))
         resizeTry(os.path.join(BASE_DIR, 'media', str(self.image)))

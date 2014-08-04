@@ -2,9 +2,13 @@
 {% block pagetitle %}{% endblock%}
 
         {%block button%}
+        <a  data-toggle="modal" href="{% url "root" %}artMore/{{item.1}}" data-target="#modal" class="btn btn-circle">
+        	<i class="fa fa-list-alt animated"></i>
+        </a>
         <div id="footer">
+        	 
             <a href="{{MEDIA_URL}}{{ item.3 }}"  data-lightbox="gallery" class="btn btn-circle">
-            	<i class="fa fa-search animated"></i>
+            	<i class="fa fa-arrows animated"></i>
             </a>
             <button data-container="body" data-toggle="popover" data-trigger="hover" data-placement="bottom" 
             		data-content="{{ item.4 | safe }}" class="btn-description btn btn-circle">
@@ -16,7 +20,18 @@
 {% block scripts %}
 <script>
 	$('.btn-description').popover();
+	
+	$(document.body).on('hidden.bs.modal', function () {
+    	$('#modal').removeData('bs.modal');
+	});
 </script>
+<div id= "modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      
+    </div>
+  </div>
+</div>
 
 {%endblock%}
 <!--{{ item.5 | safe }} --> 

@@ -24,6 +24,15 @@ h6 {
     letter-spacing: 1px;
 }
 
+.modal-content * {
+	color : black;
+	padding: 20px 20px 20px 20px;
+}
+
+#modal {
+	
+}
+
 div.about-section > p {
     margin: 0 0 25px;
     font-size: 18px;

@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response
+from django.http import HttpResponse
 from django.template import RequestContext, Template
 from artSite.models import Gallery, Art, Project, About
 
@@ -61,6 +62,14 @@ class ArtLists():
         for about in About.objects.all().order_by('id'):
             allAboutList.append((about.title, about.id, about.image, about.body))
         return allAboutList
+    
+    def artMoreInfo(self, artId):
+        try:
+            art = Art.objects.get(id=artId)   
+        except (ValueError, Art.DoesNotExist):
+            return 'No matching description found!'
+        return art.more_info_html
+        
         
 def ProjectsPage(request):
     """ Page to show all projects """
@@ -112,5 +121,11 @@ def AboutView(request):
     if request.method == 'GET':
         return render_to_response('about.html', {'items':aboutList}, context)
     
-
+def ArtModalView(request, id):
+    context = RequestContext(request)
+    artClass = ArtLists()
+    Modal = artClass.artMoreInfo(id)
+    
+    if request.method == 'GET':
+        return HttpResponse(Modal, content_type='text/html')
     
