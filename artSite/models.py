@@ -1,11 +1,19 @@
-from django.db import models
-from time import sleep
-from markdown import markdown
-from django.core.exceptions import ValidationError
-from django.dispatch import Signal
-from imagefuncs import imgResize, imgRename
-from djipster.settings import BASE_DIR
 import os
+from time import sleep
+
+from django.core.exceptions import ValidationError
+from django.db import models
+from django.dispatch import Signal
+from markdown import markdown
+
+from djipster.settings import BASE_DIR
+from imagefuncs import imgResize, imgRename
+
+######################################################################
+markdown_help_text = 'Write in Markdown! <a href=\'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet/\'  target=\'_blank\'>Help</a>'
+
+
+######################################################################
 
 def validate_only_one_instance(obj):
     ''' Used for making sure only one entry exists on a model. For example the title of the site '''
@@ -74,7 +82,6 @@ class Project(models.Model):
     
 class Art(models.Model):
     '''Each art piece. Has to be in a gallery and project'''
-
     upload_folder = 'upload/art'
     
     title = models.CharField(max_length=50)
@@ -82,8 +89,8 @@ class Art(models.Model):
     gallery = models.ForeignKey('Gallery',  null = True, blank = True)
     image = models.FileField(upload_to = upload_folder)
     image_res = models.FileField(default = 'notResized', upload_to = upload_folder, blank = True, null = True, editable = False)
-    description = models.CharField('Description', help_text='Say something if you want', max_length=255, blank=True, null = True)
-    more_info_markdown = models.TextField('More info on the art', help_text='Write in Markdown! <a href=\'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet/\'  target=\'_blank\'>Help</a>', blank=True, null=True)
+    description = models.CharField('Short Description', help_text='Say something if you want', max_length=255, blank=True, null = True)
+    more_info_markdown = models.TextField('Longer Description', help_text=markdown_help_text, blank=True, null=True)
     more_info_html = models.TextField('More info HTML', help_text='HTML from markdown : Do not edit me!', blank=True, null=True)
     
     def save(self):
@@ -96,11 +103,11 @@ class Art(models.Model):
         
     def __unicode__(self):
         return self.title
-    
+
 class About(models.Model):
     '''Each section in About. To be written in Markdown (body_markdown field) to allow editing in CMS.'''
     title = models.CharField(max_length=50)
-    body_markdown = models.TextField('Entry Body', help_text='Write in Markdown! <a href=\'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet/\'  target=\'_blank\'>Help</a>', blank=True)
+    body_markdown = models.TextField('Entry Body', help_text=markdown_help_text, blank=True)
     body = models.TextField('Entry HTML', help_text='HTML from markdown : Do not edit me!', blank=True)
     image = models.FileField(upload_to = 'upload/about', blank=True)
     
