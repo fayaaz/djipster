@@ -10,8 +10,9 @@ from djipster.settings import BASE_DIR
 from imagefuncs import imgResize, imgRename
 
 ######################################################################
+# markdown settings
 markdown_help_text = 'Write in Markdown! <a href=\'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet/\'  target=\'_blank\'>Help</a>'
-
+markdown_extensions = ['tables', 'toc' , 'nl2br', 'wikilinks']
 
 ######################################################################
 
@@ -95,7 +96,7 @@ class Art(models.Model):
     
     def save(self):
         ''' Resize uploaded image by saving the model first, resizing and then saving again '''
-        self.more_info_html = markdown(self.more_info_markdown)
+        self.more_info_html = markdown(self.more_info_markdown, extensions=markdown_extensions)
         super(Art, self).save()
         self.image_res = str(imgRename(str(self.image)))
         resizeTry(os.path.join(BASE_DIR, 'media', str(self.image)))
@@ -116,7 +117,7 @@ class About(models.Model):
     
     def save(self):
         '''Save the markdown to HTML'''
-        self.body = markdown(self.body_markdown)
+        self.body = markdown(self.body_markdown, extensions=markdown_extensions)
         super(About, self).save() # Call the "real" save() method.
         
 def resizeTry(image):

@@ -149,6 +149,7 @@ a:focus {
 .intro-seperator{
 	margin-top:25px;
 	margin-bottom:25px;
+	background-attachment: fixed;
 }
 
 .intro-body {
@@ -269,7 +270,7 @@ a:focus {
     color: #fff;
     background: url(../img/downloads-bg.jpg) no-repeat center center scroll;
     background-color: #000;
-    
+    background-attachment: fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
